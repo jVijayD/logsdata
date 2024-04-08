@@ -1,0 +1,15 @@
+#!/bin/bash
+cat /var/log/syslog.1 > logtestfile.txt
+LOG_DIR="/var/log/syslog.1"  # Change this to your server's log directory
+LOG_FILE="logtestfile.txt"
+ZIP_FILE="server_logs.tar.gz"
+
+#cd "$LOG_DIR" || exit
+
+cat /var/log/syslog.1 > "$LOG_FILE"
+
+tar -cvf "$ZIP_FILE" "$LOG_FILE"
+
+rm "$LOG_FILE"
+echo "Server logs have been stored in $ZIP_FILE"
+# 0 */1 * * * testlog.sh #make cronjob for every hour
